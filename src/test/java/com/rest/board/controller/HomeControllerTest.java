@@ -1,0 +1,39 @@
+package com.rest.board.controller;
+
+import org.junit.jupiter.api.Test;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.http.MediaType;
+import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.test.web.servlet.MockMvc;
+
+import static org.junit.jupiter.api.Assertions.*;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+
+@RunWith(SpringRunner.class)
+@SpringBootTest
+@AutoConfigureMockMvc
+class HomeControllerTest {
+
+    @Autowired
+    private MockMvc mockMvc;
+
+    @Test
+    public void test() throws Exception {
+        System.out.println("hello");
+    }
+
+    @Test
+    public void getHome() throws Exception {
+        mockMvc.perform(get("/api/home/get")
+                .contentType(MediaType.APPLICATION_JSON_VALUE)
+                .param("name", "junghwan")
+                .param("age", "28"))
+                .andExpect(status().isOk())
+                .andDo(print());
+    }
+}
